@@ -1,7 +1,7 @@
 TESTDIR ?= *
 TESTS=$(wildcard $(TESTDIR)/*.markdown)
 DIFFS=$(patsubst %.markdown,%.diff,$(TESTS))
-PROG ?= ../bin/markdown
+PROG ?= ../dist/build/sm/sm
 TIDYCMD ?= tidy -asxhtml -utf8 --show-body-only yes --show-warnings no -quiet
 
 # Check to see if echo supports -e option to allow backslash escapes

@@ -11,11 +11,11 @@ Several markdown extensions are implemented, including fenced code blocks and
 significant list start numbers.  All URLs are made into hyperlinks.
 See comments in the code for more details.
 
-To compile, get the Haskell Platform, then install dependencies:
+To build, get the Haskell Platform, then:
 
-    cabal update && cabal install blaze-html attoparsec
+    cabal update && cabal install
 
-Then 'make'.  'make test' will run some tests.
+'make test' will run some tests.
 
 The library is released under the BSD license; see LICENSE for terms.
 
