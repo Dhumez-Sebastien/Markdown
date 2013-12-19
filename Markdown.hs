@@ -1189,7 +1189,7 @@ pOne :: Char -> ReferenceMap -> Inlines -> Parser Inlines
 pOne c refmap prefix = do
   contents <- msum <$> many ( (nfbChar c >> pInline refmap)
                              <|> (string (T.pack [c,c]) >>
-                                  nfbChar c >> pTwo c refmap prefix) )
+                                  nfbChar c >> pTwo c refmap mempty) )
   (char c >> return (single Emph $ prefix <> contents))
     <|> return (singleton (Str (T.singleton c)) <> (prefix <> contents))
 
