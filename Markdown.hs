@@ -79,13 +79,12 @@
 --
 -- * Block elements inside list items need not be indented four
 --   spaces.  If they are indented beyond the bullet or numerical
---   list marker and a following space, they will be considered
---   additional blocks inside the list item.  So, the following is
---   a list item with two paragraphs:
+--   list marker, they will be considered additional blocks inside
+--   the list item.  So, the following is a list item with two paragraphs:
 --
 --       - one
 --
---         two
+--        two
 --
 --   This implies that code blocks inside list items must be indented
 --   five spaces past the first column after the bullet or numerical
@@ -245,11 +244,11 @@ data Inline = Str Text
 type Inlines = Seq Inline
 
 -- Returns width of a list marker based on the ListType.
--- Width includes a following space.
+-- Width does not include a following space.
 listMarkerWidth :: ListType -> Int
-listMarkerWidth (Bullet _) = 2
+listMarkerWidth (Bullet _) = 1
 listMarkerWidth (Numbered wrap n) =
-  (if wrap == ParensAround then 3 else 2) +
+  (if wrap == ParensAround then 2 else 1) +
   case n of
        _ | n < 10    -> 1
          | n < 100   -> 2
