@@ -1,5 +1,10 @@
 PROG ?= dist/build/sm/sm
 
+.PHONY: all test bench linecount clean
+
+all: $(PROG)
+	cabal configure --user && cabal build
+
 test: $(PROG)
 	make -C tests --quiet clean all
 
