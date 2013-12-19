@@ -1,0 +1,31 @@
+--- Lists/Sublists.expected.html	2013-12-19 14:04:37.000000000 -0800
++++ Lists/Sublists.actual.html	2013-12-19 14:04:37.000000000 -0800
+@@ -14,3 +14,3 @@
+ <ol>
+-<li>one
++<li><p>one</p>
+ <ol>
+@@ -24,5 +24,3 @@
+ </ol></li>
+-</ol>
+-<ol>
+-<li>one
++<li><p>one</p>
+ <ul>
+@@ -38,7 +36,7 @@
+ <ul>
+-<li>one
+-<ul>
+-<li>two
++<li>one</li>
++<li><p>two</p>
+ <ol>
+-<li>three
++<li>three</li>
++</ol>
+ <ol>
+@@ -46,4 +44,2 @@
+ </ol></li>
+-</ol></li>
+-</ul></li>
+ </ul>

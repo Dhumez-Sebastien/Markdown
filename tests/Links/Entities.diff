@@ -1,0 +1,7 @@
+--- Links/Entities.expected.html	2013-12-19 14:04:36.000000000 -0800
++++ Links/Entities.actual.html	2013-12-19 14:04:36.000000000 -0800
+@@ -1,2 +1,2 @@
+-<p><a href="http://g&ouml;&ouml;gle.com">http://g&ouml;&ouml;gle.com</a></p>
+-<p><a href="/url" title="g&ouml;&ouml;gle &amp; yahoo">hi</a></p>
++<p><a href="http://g&amp;ouml;&amp;ouml;gle.com">http://g&amp;ouml;&amp;ouml;gle.com</a></p>
++<p><a href="/url" title="g&amp;ouml;&amp;ouml;gle &amp; yahoo">hi</a></p>

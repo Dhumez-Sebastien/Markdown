@@ -1,0 +1,7 @@
+--- Images/FormattingInAlt.expected.html	2013-12-19 14:04:36.000000000 -0800
++++ Images/FormattingInAlt.actual.html	2013-12-19 14:04:36.000000000 -0800
+@@ -1,2 +1,2 @@
+-<p><img src="/url.png" alt="my *new* fish" /></p>
+-<p><img src="/url.png" alt="my [new](/new.html &quot;new!&quot;) fish" title="title" /></p>
++<p><img src="/url.png" alt="my &lt;em&gt;new&lt;/em&gt; fish" /></p>
++<p><img src="/url.png" alt="my &lt;a href=&quot;/new.html&quot; title=&quot;new!&quot;&gt;new&lt;/a&gt; fish" title="title" /></p>

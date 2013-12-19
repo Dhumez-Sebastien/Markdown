@@ -1,0 +1,9 @@
+--- Code/BlankLines.expected.html	2013-12-19 14:04:36.000000000 -0800
++++ Code/BlankLines.actual.html	2013-12-19 14:04:36.000000000 -0800
+@@ -32,5 +32,3 @@
+ </code></pre></li>
+-</ol>
+-<ol>
+-<li>One</li>
++<li><p>One</p></li>
+ </ol>

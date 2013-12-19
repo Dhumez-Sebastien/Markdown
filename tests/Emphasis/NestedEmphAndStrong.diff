@@ -1,0 +1,11 @@
+--- Emphasis/NestedEmphAndStrong.expected.html	2013-12-19 14:04:36.000000000 -0800
++++ Emphasis/NestedEmphAndStrong.actual.html	2013-12-19 14:04:36.000000000 -0800
+@@ -50,5 +50,5 @@
+ <li>a_b_c</li>
+-<li>__a__b</li>
+-<li>a__b__</li>
+-<li>a__b__c</li>
++<li><strong>a</strong>b</li>
++<li>a<strong>b</strong></li>
++<li>a<strong>b</strong>c</li>
+ <li>my_precious_file.txt</li>

@@ -1,0 +1,14 @@
+--- Lists/MultipleBlankLines.expected.html	2013-12-19 14:04:37.000000000 -0800
++++ Lists/MultipleBlankLines.actual.html	2013-12-19 14:04:37.000000000 -0800
+@@ -14,3 +14,3 @@
+ <ul>
+-<li>one
++<li><p>one</p>
+ <ul>
+@@ -18,5 +18,3 @@
+ </ul></li>
+-</ul>
+-<ul>
+-<li>one
++<li><p>one</p>
+ <ul>

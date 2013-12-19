@@ -1,0 +1,7 @@
+--- Code/WhiteLines.expected.html	2013-12-19 14:04:36.000000000 -0800
++++ Code/WhiteLines.actual.html	2013-12-19 14:04:36.000000000 -0800
+@@ -5,2 +5,4 @@
+ DEF
++       
++ 
+ </code></pre>

@@ -1,0 +1,12 @@
+--- Misc/Laziness.expected.html	2013-12-19 14:04:37.000000000 -0800
++++ Misc/Laziness.actual.html	2013-12-19 14:04:37.000000000 -0800
+@@ -18,4 +18,3 @@
+ <blockquote>
+-<pre><code>
+-</code></pre>
++<pre><code></code></pre>
+ </blockquote>
+@@ -23,2 +22,3 @@
+ <pre><code>
++
+ </code></pre>

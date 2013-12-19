@@ -1,0 +1,20 @@
+--- Links/BareLinks.expected.html	2013-12-19 14:04:36.000000000 -0800
++++ Links/BareLinks.actual.html	2013-12-19 14:04:36.000000000 -0800
+@@ -3,3 +3,3 @@
+ <p><a href="HTTPS://GOOGLE.COM">HTTPS://GOOGLE.COM</a>,
+-<a href="http://el.wikipedia.org/wiki/Τεχνολογία">http://el.wikipedia.org/wiki/Τεχνολογία</a>,
++<a href="http://el.wikipedia.org/wiki/%CE%A4%CE%B5%CF%87%CE%BD%CE%BF%CE%BB%CE%BF%CE%B3%CE%AF%CE%B1">http://el.wikipedia.org/wiki/Τεχνολογία</a>,
+ <a href="doi:10.1000/182">doi:10.1000/182</a>,
+@@ -10,7 +10,7 @@
+ <p>Taken from rinku test suite:</p>
+-<p>(<a href="http://google.com">http://google.com</a>).
+-(<a href="http://google.com">http://google.com</a>.)
+-<a href="http://en.wikipedia.org/wiki/Sprite_(computer_graphics)">http://en.wikipedia.org/wiki/Sprite_(computer_graphics)</a>
+-<a href="http://en.wikipedia.org/wiki/Sprite_[computer_graphics]">http://en.wikipedia.org/wiki/Sprite_[computer_graphics]</a>
+-<a href="http://en.wikipedia.org/wiki/Sprite_{computer_graphics}">http://en.wikipedia.org/wiki/Sprite_{computer_graphics}</a>
++<p>(http://google.com).
++(http://google.com.)
++<a href="http://en.wikipedia.org/wiki/Sprite_(computer_graphics">http://en.wikipedia.org/wiki/Sprite_(computer_graphics</a>)
++http://en.wikipedia.org/wiki/Sprite<em>[computer_graphics]
++http://en.wikipedia.org/wiki/Sprite</em>{computer_graphics}
+ <a href="http://example.com/Notification_Center-GitHub-20101108-140050.jpg">http://example.com/Notification_Center-GitHub-20101108-140050.jpg</a>

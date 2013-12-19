@@ -1,0 +1,5 @@
+--- Links/Nested.expected.html	2013-12-19 14:04:36.000000000 -0800
++++ Links/Nested.actual.html	2013-12-19 14:04:36.000000000 -0800
+@@ -1 +1 @@
+-<p><a href="/url2">link [in link](/url)</a></p>
++<p><a href="/url2">link <a href="/url">in link</a></a></p>

@@ -1,0 +1,7 @@
+--- HTML/Blocks.expected.html	2013-12-19 14:04:36.000000000 -0800
++++ HTML/Blocks.actual.html	2013-12-19 14:04:36.000000000 -0800
+@@ -16,3 +16,3 @@
+ <div>
+-* raw html with trailing space 
++* raw html with trailing space
+ </div>

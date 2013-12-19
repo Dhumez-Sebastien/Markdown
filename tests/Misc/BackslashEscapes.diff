@@ -1,0 +1,6 @@
+--- Misc/BackslashEscapes.expected.html	2013-12-19 14:04:37.000000000 -0800
++++ Misc/BackslashEscapes.actual.html	2013-12-19 14:04:37.000000000 -0800
+@@ -14,2 +14,2 @@
+ \a \b \T cannot.
+-unicode letters and symbols cannot: \π \‥.</p>
++unicode letters and symbols cannot: \π ‥.</p>

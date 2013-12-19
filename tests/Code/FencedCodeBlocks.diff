@@ -1,0 +1,6 @@
+--- Code/FencedCodeBlocks.expected.html	2013-12-19 14:04:36.000000000 -0800
++++ Code/FencedCodeBlocks.actual.html	2013-12-19 14:04:36.000000000 -0800
+@@ -24,2 +24,3 @@
+ 
++
+ </code></pre>

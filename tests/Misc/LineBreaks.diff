@@ -1,0 +1,7 @@
+--- Misc/LineBreaks.expected.html	2013-12-19 14:04:37.000000000 -0800
++++ Misc/LineBreaks.actual.html	2013-12-19 14:04:37.000000000 -0800
+@@ -6,3 +6,3 @@
+ <p>Two spaces at the end of a paragraph are
+-not a line break. </p>
++not a line break.</p>
+ <p>A backslash at the end of a paragraph is

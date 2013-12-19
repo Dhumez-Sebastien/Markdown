@@ -1,0 +1,19 @@
+--- Code/IndentedInLists.expected.html	2013-12-19 14:04:36.000000000 -0800
++++ Code/IndentedInLists.actual.html	2013-12-19 14:04:36.000000000 -0800
+@@ -6,3 +6,3 @@
+ <li><p>foo</p>
+-<pre><code>code starts here
++<pre><code> code starts here
+ </code></pre></li>
+@@ -15,8 +15,6 @@
+ <pre><code>code starts here
+-</code></pre>
+-<ul>
+-<li>foo
+-<pre><code>code starts here
+ </code></pre></li>
+-</ul></li>
++<li><p>foo</p>
++<pre><code>  code starts here
++</code></pre></li>
+ </ul>

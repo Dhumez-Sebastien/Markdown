@@ -1,0 +1,37 @@
+--- Lists/TightLooseBlockquote.expected.html	2013-12-19 14:04:37.000000000 -0800
++++ Lists/TightLooseBlockquote.actual.html	2013-12-19 14:04:37.000000000 -0800
+@@ -1,3 +1,3 @@
+ <ul>
+-<li>tight I
++<li><p>tight I</p>
+ <blockquote>
+@@ -8,3 +8,3 @@
+ <ul>
+-<li>tight II
++<li><p>tight II</p>
+ <blockquote>
+@@ -12,3 +12,3 @@
+ </blockquote>
+-foo</li>
++<p>foo</p></li>
+ <li>tight II</li>
+@@ -16,5 +16,8 @@
+ <ol>
+-<li>Blank lines in bq don&#39;t break list
++<li><p>Blank lines in bq don&#39;t break list</p>
+ <blockquote>
+ <p>bq</p>
++</blockquote>
++<blockquote>
++
+ </blockquote></li>
+@@ -25,5 +28,8 @@
+ <ul>
+-<li>item A
++<li><p>item A</p>
+ <blockquote>
+ <p>bq</p>
++</blockquote>
++<blockquote>
++
+ </blockquote></li>

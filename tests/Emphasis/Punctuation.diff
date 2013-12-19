@@ -1,0 +1,15 @@
+--- Emphasis/Punctuation.expected.html	2013-12-19 14:04:36.000000000 -0800
++++ Emphasis/Punctuation.actual.html	2013-12-19 14:04:36.000000000 -0800
+@@ -1,2 +1,2 @@
+-<p>Here is a _ that is <em>cool</em>.</p>
++<p>Here is a _ that is _cool_.</p>
+ <p><em>Foo.</em></p>
+@@ -4,6 +4,6 @@
+ <p><em><strong>Foo.</strong></em></p>
+-<p><em>Foo</em>.</p>
++<p>_Foo_.</p>
+ <p><strong>Foo</strong>.</p>
+ <p><em><strong>Foo</strong></em>.</p>
+-<p><em>Foo</em>. <em>Foo</em>? <em>Foo</em>! <em>Foo</em>: <em>Foo</em>; (<em>Foo</em>)</p>
++<p><em>Foo_. </em>Foo<em>? </em>Foo<em>! </em>Foo<em>: </em>Foo_; (_Foo_)</p>
+ <p><strong>Foo</strong>. <strong>Foo</strong>? <strong>Foo</strong>! <strong>Foo</strong>: <strong>Foo</strong>; (<strong>Foo</strong>)</p>
