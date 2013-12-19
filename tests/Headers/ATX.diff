@@ -1,7 +1,0 @@
---- Headers/ATX.expected.html	2013-12-19 14:04:36.000000000 -0800
-+++ Headers/ATX.actual.html	2013-12-19 14:04:36.000000000 -0800
-@@ -5,3 +5,3 @@
- <h5>Five</h5>
--<h6>Six</h6>
-+<p>Six</p>
- <p>####### Seven</p>
