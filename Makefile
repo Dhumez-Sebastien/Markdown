@@ -1,8 +1,8 @@
 PROG ?= dist/build/sm/sm
 
-.PHONY: all test bench linecount clean
+.PHONY: test bench linecount clean
 
-all: $(PROG)
+$(PROG): Markdown.hs bin/markdown.hs
 	cabal configure --user && cabal build
 
 test: $(PROG)
@@ -11,12 +11,12 @@ test: $(PROG)
 bench: $(PROG)
 	time $< tests/Original/Markdown_Documentation_Syntax.markdown >/dev/null
 	time ../peg-markdown/markdown tests/Original/Markdown_Documentation_Syntax.markdown >/dev/null
+	time pandoc tests/Original/Markdown_Documentation_Syntax.markdown >/dev/null
+	time Markdown.pl tests/Original/Markdown_Documentation_Syntax.markdown >/dev/null
 
 linecount:
 	@echo "Non-comment, non-blank lines:" ; \
 	grep '^[^-]' Markdown.hs | wc -l
 
 clean:
-	-@rm *.o *.hi bin/markdown bin/markdown-prof bin/markdown-opt \
-	  bin/*.o bin/*.hi; \
-	  make -C tests clean
+	cabal clean && make -C tests clean
