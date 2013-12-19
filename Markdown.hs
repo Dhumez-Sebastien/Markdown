@@ -1012,7 +1012,7 @@ htmlBlockParser :: Text -> Text -> BlockParser Blocks
 htmlBlockParser ln _ = do
   advance -- consume first line
   lns <- withLineScanner (nfb scanBlankline) $ getLines lineScanners
-  return $ singleton $ HtmlBlock $ joinLines $ map T.stripEnd (ln:lns)
+  return $ singleton $ HtmlBlock $ joinLines $ {- map T.stripEnd -} (ln:lns)
 
 -- Parse a text into inlines, resolving reference links
 -- using the reference map.
