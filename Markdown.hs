@@ -184,7 +184,7 @@ import Network.URI (parseURI, isAllowedInURI, escapeURIString)
 import Data.Monoid
 import Data.Foldable (foldMap, toList)
 import Control.Applicative hiding (optional,empty)
-import Data.Sequence (Seq, singleton, empty, (<|))
+import Data.Sequence (Seq, singleton, empty, (<|), ViewR(..), viewr)
 import qualified Data.Sequence as Seq
 import qualified Data.Set as Set
 
@@ -1055,14 +1055,15 @@ pSpace = do
 -- so they won't trigger emphasis.
 pStr :: Parser Inlines
 pStr = do
-  let strChunk = takeWhile1 isWordChar
-  let underscore = skip (=='_')
-  s <- T.intercalate "_" <$> strChunk `sepBy1` underscore
-  -- check to see if we might have a bare URL:
-  ((singleton $ Str s) <$ nfbChar ':')
-   <|> if s `Set.member` schemeSet
-          then pUri s <|> return (singleton $ Str s)
-          else return (singleton $ Str s)
+  x  <- takeWhile1 isWordChar
+  xs <- many $ (T.append <$> takeWhile (== '_') <*> takeWhile1 isWordChar)
+          <|>  (T.append <$> takeWhile (== ' ') <*> takeWhile1 isWordChar)
+  let sq = Seq.fromList . intersperse Space . map Str . T.words . T.concat
+           $ (x:xs)
+  case viewr sq of
+       (rest :> Str y) | y `Set.member` schemeSet ->
+             ((rest `mappend`) <$> pUri y) <|> return sq
+       _ -> return sq
  where isWordChar :: Char -> Bool
        -- This is a dispensable optimization over isAlphaNum, covering
        -- common cases first.
