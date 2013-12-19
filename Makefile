@@ -1,5 +1,6 @@
 PROG ?= dist/build/sm/sm
-
+BENCHRUNS ?= 10
+BENCHPROGS ?= ../peg-markdown/markdown pandoc Markdown.pl
 .PHONY: test bench linecount clean
 
 $(PROG): Markdown.hs bin/markdown.hs
@@ -9,10 +10,13 @@ test: $(PROG)
 	make -C tests --quiet clean all
 
 bench: $(PROG)
-	time $< tests/Original/Markdown_Documentation_Syntax.markdown >/dev/null
-	time ../peg-markdown/markdown tests/Original/Markdown_Documentation_Syntax.markdown >/dev/null
-	time pandoc tests/Original/Markdown_Documentation_Syntax.markdown >/dev/null
-	time Markdown.pl tests/Original/Markdown_Documentation_Syntax.markdown >/dev/null
+	for prog in $(PROG) $(BENCHPROGS); do \
+	   echo; \
+	   echo "Benchmarking $$prog"; \
+	     time for i in {1..$(BENCHRUNS)}; do \
+	       $$prog tests/Original/Markdown_Documentation_Syntax.markdown; \
+	     done > /dev/null; \
+	done
 
 linecount:
 	@echo "Non-comment, non-blank lines:" ; \
