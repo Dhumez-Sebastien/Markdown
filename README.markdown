@@ -38,7 +38,7 @@ works, but this gives a more "visible" alternative.
 
 ### Backslash escapes
 
-All symbols and punctuation marks can be backslash-escaped,
+All ASCII symbols and punctuation marks can be backslash-escaped,
 not just those with a use in Markdown.
 
 ## Revisions

@@ -118,10 +118,10 @@ isEmptyLine = T.all (==' ')
 
 -- The original Markdown only allowed certain symbols
 -- to be backslash-escaped.  It was hard to remember
--- which ones could be, so we now allow any punctuation mark or
+-- which ones could be, so we now allow any ascii punctuation mark or
 -- symbol to be escaped, whether or not it has a use in Markdown.
 isEscapable :: Char -> Bool
-isEscapable c = isSymbol c || isPunctuation c
+isEscapable c = isAscii c && (isSymbol c || isPunctuation c)
 
 
 -- Link references.
