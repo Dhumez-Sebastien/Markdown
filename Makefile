@@ -3,18 +3,18 @@ BENCHRUNS ?= 10
 BENCHPROGS ?= ../peg-markdown/markdown pandoc Markdown.pl
 .PHONY: test bench linecount clean
 
-$(PROG): Markdown.hs bin/markdown.hs
+$(PROG): Markdown.hs bin/sm.hs
 	cabal configure --user && cabal build
 
-test: $(PROG)
+test:
 	make -C tests --quiet clean all
 
-bench: $(PROG)
+bench:
 	for prog in $(PROG) $(BENCHPROGS); do \
 	   echo; \
 	   echo "Benchmarking $$prog"; \
 	     time for i in {1..$(BENCHRUNS)}; do \
-	       $$prog tests/Original/Markdown_Documentation_Syntax.markdown; \
+	       $$prog < tests/Original/Markdown_Documentation_Syntax.markdown; \
 	     done > /dev/null; \
 	done
 

@@ -21,11 +21,11 @@ all: $(DIFFS)
 	$(ECHO)  "\033[1m$$PASS of $$TESTS tests passed.\033[0m"; \
 	if [ $$TESTS -eq $$PASS ]; then exit 0; else exit 1; fi
 
-%.actual.html: %.markdown $(PROG)
+%.actual.html: %.markdown
 ifeq ($(TIDY),1)
-	-$(PROG) $< | $(TIDYCMD) > $@
+	-cat $< | $(PROG) | $(TIDYCMD) > $@
 else
-	$(PROG) $< > $@
+	$(PROG) < $< > $@
 endif
 
 %.expected.html: %.html
