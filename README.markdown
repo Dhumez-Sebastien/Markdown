@@ -222,7 +222,24 @@ To build, get the Haskell Platform, then:
 
     cabal update && cabal install
 
-'make test' will run some tests.
+## Tests
+
+The `tests` subdirectory contains an extensive suite of tests,
+including all of John Gruber's original Markdown tests, plus
+many of the tests from Michel Fortin's `mdtest` suite.  Each
+test consists in two files with the same basename, a markdown
+source and an expected HTML output.
+
+To run the test suite, do
+
+    `make test`
+
+Note that not all tests currently pass.  Setting the environment
+variable `TIDY=1` will run the expected and actual output through
+tidy before comparing them.  You can run this test suite on another
+markdown processor by doing
+
+    `PROG=myothermarkdown make test`
 
 ## License
 
