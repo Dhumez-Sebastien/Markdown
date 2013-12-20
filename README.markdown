@@ -147,11 +147,11 @@ in the following, the asterisks are literal asterisks:
 while in the following, the asterisks are interpreted as markdown
 emphasis:
 
-   <div>
+    <div>
 
-   *hello*
+    *hello*
 
-   </div>
+    </div>
 
 In the first example, we have a single raw HTML block; in the second,
 we have two raw HTML blocks with an intervening paragraph.  This system
