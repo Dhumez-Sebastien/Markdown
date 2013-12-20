@@ -1,5 +1,6 @@
 TESTDIR ?= *
-TESTS=$(wildcard $(TESTDIR)/*.markdown)
+PATT ?= .
+TESTS=$(shell ls $(TESTDIR)/*.markdown | grep $(PATT))
 DIFFS=$(patsubst %.markdown,%.diff,$(TESTS))
 PROG ?= ../dist/build/sm/sm
 TIDYCMD ?= tidy -asxhtml -utf8 --show-body-only yes --show-warnings no -quiet
