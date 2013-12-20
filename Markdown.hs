@@ -870,8 +870,9 @@ pStr = do
   let sq = Seq.fromList . intersperse Space . map Str . T.words . T.concat
            $ (x:xs)
   case viewr sq of
-       (rest :> Str y) | y `Set.member` schemeSet ->
-             ((rest `mappend`) <$> pUri y) <|> return sq
+       (rest :> Str ys)
+         | T.all (inClass "a-zA-Z0-9-") ys && ys `Set.member` schemeSet ->
+             ((rest `mappend`) <$> pUri ys) <|> return sq
        _ -> return sq
  where isWordChar :: Char -> Bool
        -- This is a dispensable optimization over isAlphaNum, covering
