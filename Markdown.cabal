@@ -38,7 +38,7 @@ library
   ghc-options:       -Wall -fno-warn-unused-do-bind
 
 executable sm
-  main-is:           markdown.hs
+  main-is:           sm.hs
   hs-source-dirs:    bin
   other-extensions:  OverloadedStrings
   build-depends:     base >=4.4 && <4.7,
