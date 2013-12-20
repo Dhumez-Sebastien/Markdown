@@ -1163,7 +1163,7 @@ renderBlocks :: Blocks -> Html
 renderBlocks = mconcat . intersperse blocksep . map renderBlock . toList
   where renderBlock :: Block -> Html
         renderBlock (Header n ils)
-          | n >= 1 && n <= 5 = ([H.h1,H.h2,H.h3,H.h4,H.h5] !! (n - 1))
+          | n >= 1 && n <= 6 = ([H.h1,H.h2,H.h3,H.h4,H.h5,H.h6] !! (n - 1))
                                   $ renderInlines ils
           | otherwise        = H.p (renderInlines ils)
         renderBlock (Para ils) = H.p (renderInlines ils)
