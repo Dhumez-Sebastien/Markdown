@@ -1,5 +1,4 @@
 PROG ?= dist/build/sm/sm
-BENCHRUNS ?= 10
 BENCHPROGS ?= ../peg-markdown/markdown pandoc Markdown.pl
 .PHONY: test bench linecount clean
 
@@ -13,9 +12,9 @@ bench:
 	for prog in $(PROG) $(BENCHPROGS); do \
 	   echo; \
 	   echo "Benchmarking $$prog"; \
-	     time for i in {1..$(BENCHRUNS)}; do \
-	       $$prog < tests/Original/Markdown_Documentation_Syntax.markdown; \
-	     done > /dev/null; \
+	     time for i in tests/*/*.markdown; do \
+	       cat $$i | $$prog >/dev/null ; \
+	       done ; \
 	done
 
 linecount:
