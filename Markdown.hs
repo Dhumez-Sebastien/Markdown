@@ -111,26 +111,6 @@ isWhitespace '\n' = True
 isWhitespace '\r' = True
 isWhitespace _    = False
 
--- Code fences can use ``` or ~~~.
-isCodeFenceChar :: Char -> Bool
-isCodeFenceChar '`' = True
-isCodeFenceChar '~' = True
-isCodeFenceChar _   = False
-
--- Bullets are - + *.
-isBulletChar :: Char -> Bool
-isBulletChar '-' = True
-isBulletChar '+' = True
-isBulletChar '*' = True
-isBulletChar _   = False
-
--- Hrules can be made of * - or _.
-isHRuleChar :: Char -> Bool
-isHRuleChar '*'  = True
-isHRuleChar '-'  = True
-isHRuleChar '_'  = True
-isHRuleChar _    = False
-
 -- A line with all space characters is regarded as empty.
 -- Note: we strip out tabs.
 isEmptyLine :: Text -> Bool
@@ -268,7 +248,7 @@ scanAtxHeaderStart = () <$ parseAtxHeaderStart
 scanHRuleLine :: Scanner
 scanHRuleLine = do
   scanNonindentSpaces
-  c <- satisfy isHRuleChar
+  c <- satisfy $ inClass "*_-"
   count 2 $ scanSpaces >> char c
   skipWhile (\x -> x == ' ' || x == c)
   endOfInput
@@ -281,7 +261,7 @@ scanCodeFenceLine = () <$ codeFenceParserLine
 -- the fence part and the rest (after any spaces).
 codeFenceParserLine :: Parser (Text, Text)
 codeFenceParserLine = do
-  c <- satisfy isCodeFenceChar
+  c <- satisfy $ inClass "`~"
   count 2 (char c)
   extra <- takeWhile (== c)
   scanSpaces
@@ -324,7 +304,7 @@ parseListMarker = parseBullet <|> parseListNumber
 -- Parse a bullet and return list type.
 parseBullet :: Parser ListType
 parseBullet = do
-  c <- satisfy isBulletChar
+  c <- satisfy $ inClass "+*-"
   scanSpace <|> scanBlankline -- allow empty list item
   unless (c == '+')
     $ nfb $ (count 2 $ scanSpaces >> skip (== c)) >>
@@ -675,12 +655,10 @@ pLinkUrl = do
      then T.pack <$> manyTill
            (pSatisfy (\c -> c /='\r' && c /='\n')) (char '>')
      else T.concat <$> many (regChunk <|> parenChunk)
-    where regChunk = takeWhile1 (\c -> not (isWhitespace c) && c /= '(' &&
-                                   c /= ')' && c /= '\\')
-                    <|> pEscaped
-          parenChunk = inParens . T.concat <$> (char '(' *>
+    where regChunk = takeWhile1 (notInClass " \t\n\r()\\") <|> pEscaped
+          parenChunk = parenthesize . T.concat <$> (char '(' *>
                          manyTill (regChunk <|> parenChunk) (char ')'))
-          inParens x = "(" <> x <> ")"
+          parenthesize x = "(" <> x <> ")"
 
 -- A link title, single or double quoted or in parentheses.
 -- Note that Markdown.pl doesn't allow the parenthesized form in
@@ -689,12 +667,16 @@ pLinkUrl = do
 pLinkTitle :: Parser Text
 pLinkTitle = do
   c <- satisfy (\c -> c == '"' || c == '\'' || c == '(')
-  nfb $ skip isWhitespace
-  nfbChar ')'
+  next <- peekChar
+  case next of
+       Nothing                 -> mzero
+       Just x
+         | isWhitespace x      -> mzero
+         | x == ')'            -> mzero
+         | otherwise           -> return ()
   let ender = if c == '(' then ')' else c
   let pEnder = char ender <* nfb (skip isAlphaNum)
-  let regChunk = takeWhile1 (\x -> x /= ender && x /= '\\')
-             <|> pEscaped
+  let regChunk = takeWhile1 (\x -> x /= ender && x /= '\\') <|> pEscaped
   let nestedChunk = (\x -> T.singleton c <> x <> T.singleton ender)
                       <$> pLinkTitle
   T.concat <$> manyTill (regChunk <|> nestedChunk) pEnder
@@ -959,6 +941,19 @@ schemes = [ -- unofficial
 schemeSet :: Set.Set Text
 schemeSet = Set.fromList $ schemes ++ map T.toUpper schemes
 
+isUriChar :: Char -> Bool
+isUriChar c = not (isPunctuation c) && (not (isAscii c) || isAllowedInURI c)
+
+inParens :: Parser Text
+inParens = do char '('
+              res <- takeWhile isUriChar
+              char ')'
+              return $ "(" <> res <> ")"
+
+innerPunct :: Parser Text
+innerPunct = T.singleton <$> (char '/'
+        <|> (pSatisfy isPunctuation <* nfb space <* nfb endOfInput))
+
 -- Parse a URI, using heuristics to avoid capturing final punctuation.
 pUri :: Text -> Parser Inlines
 pUri scheme = do
@@ -966,19 +961,11 @@ pUri scheme = do
   -- Scan non-ascii characters and ascii characters allowed in a URI.
   -- We allow punctuation except when followed by a space, since
   -- we don't want the trailing '.' in 'http://google.com.'
-  let isUriChar c = not (isPunctuation c) &&
-                       (not (isAscii c) || isAllowedInURI c)
   -- We want to allow
   -- http://en.wikipedia.org/wiki/State_of_emergency_(disambiguation)
   -- as a URL, while NOT picking up the closing paren in
   -- (http://wikipedia.org)
   -- So we include balanced parens in the URL.
-  let inParens = do char '('
-                    res <- takeWhile isUriChar
-                    char ')'
-                    return $ "(" <> res <> ")"
-  let innerPunct = T.singleton <$> (char '/'
-        <|> (pSatisfy isPunctuation <* nfb space <* nfb endOfInput))
   let uriChunk = takeWhile1 isUriChar <|> inParens <|> innerPunct
   rest <- T.concat <$> many1 uriChunk
   -- now see if they amount to an absolute URI

@@ -1,9 +1,13 @@
 PROG ?= dist/build/sm/sm
 BENCHPROGS ?= ../peg-markdown/markdown pandoc Markdown.pl
-.PHONY: test bench linecount clean
+.PHONY: prof test bench linecount clean
 
 $(PROG): Markdown.hs bin/sm.hs
 	cabal configure --user && cabal build
+
+prof:
+	cabal configure --enable-library-profiling --enable-executable-profiling --user && cabal build ; \
+	  echo "To profile:  dist/build/sm/sm +RTS -P -RTS"
 
 test:
 	make -C tests --quiet clean all
