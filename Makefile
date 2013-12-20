@@ -7,7 +7,7 @@ $(PROG): Markdown.hs bin/sm.hs
 
 prof:
 	cabal configure --enable-library-profiling --enable-executable-profiling --user && cabal build ; \
-	  echo "To profile:  dist/build/sm/sm +RTS -P -RTS"
+	  echo "To profile:  dist/build/sm/sm +RTS -pa -V0.0002 -RTS"
 
 test:
 	make -C tests --quiet clean all
